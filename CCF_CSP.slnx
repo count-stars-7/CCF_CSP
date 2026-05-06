@@ -3,5 +3,5 @@
     <Platform Name="x64" />
     <Platform Name="x86" />
   </Configurations>
-  <Project Path="CCF_CSP/CCF_CSP.vcxproj" />
+  <Project Path="CCF_CSP/CCF_CSP.vcxproj" Id="5e81566a-be22-4d62-9d0e-cc665c93f1e6" />
 </Solution>
