@@ -21,7 +21,13 @@
 
 
 
+
+
+
+
 //===========================1.2窗口=====================
+// 
+// //////////初始版本
 //#include<cstdio>
 //#include <iostream>
 //using namespace std;
@@ -118,5 +124,68 @@
 //
 //    return 0;
 //}
+//
+//
+//
+//
+// 
+/////////////////////“时间戳”方法///////////////////
+//#include <cstdio>
+//#define N 20
+//
+//struct Window {
+//    int x1, y1, x2, y2;
+//} w[N];
+//
+//int rank[N]; // 窗口的等级。等级值越大，窗口越靠上
+//
+//// 检查 x 值是否在 [l, r] 中
+//bool check(int x, int l, int r) {
+//    return x <= r && x >= l;
+//}
+//
+//void ask(int n, int tim, int x, int y) {
+//    // 对于每一次点击，扫描所有窗口，记录时间值最大（最顶层）的窗口
+//    int t = 0;
+//    for (int i = 1; i <= n; i++) {
+//        if (check(x, w[i].x1, w[i].x2) &&
+//            check(y, w[i].y1, w[i].y2) && rank[i] > rank[t])
+//            t = i;
+//    }
+//    if (!t)
+//        puts("IGNORED");
+//    else {
+//        // 将每次点击的窗口时间值设置为最大
+//        rank[t] = tim;
+//        printf("%d\n", t);
+//    }
+//}
+//
+//int main() {
+//    int n, m, x, y;
+//    scanf("%d%d", &n, &m);
+//
+//    // 读入窗口坐标，并给每个窗口设置初始时间，越靠上的窗口时间值越大
+//    for (int i = 1; i <= n; i++) {
+//        scanf("%d%d%d%d", &w[i].x1, &w[i].y1, &w[i].x2, &w[i].y2);
+//        rank[i] = i;
+//    }
+//
+//    // 模拟 m 次点击操作
+//    for (int i = 1; i <= m; i++) {
+//        scanf("%d%d", &x, &y);
+//        ask(n, n + i, x, y);
+//    }
+//    return 0;
+//}
+//////////只改变窗口编号而不是覆盖窗口值因此在时间上更优
 
 
+
+
+
+
+
+
+
+//==================================1.3命令行选项===========================
