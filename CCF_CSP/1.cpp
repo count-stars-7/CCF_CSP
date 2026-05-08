@@ -189,3 +189,114 @@
 
 
 //==================================1.3命令行选项===========================
+
+#include <cstdio>
+#include <cstring>
+#include <iostream>
+using namespace std;
+
+#define N 20
+int st[26];        // 选项是否带参数
+string param[26];  // 合法的字符参数
+bool vis[26];       // 标记数组
+
+int main() {
+    string S;
+    cin >> S;      // 读入格式字符串
+    int len = S.size();
+    for (int i = 0; i <= len - 1; i++) {
+        if (i + 1 < len && S[i + 1] == ':')
+            st[S[i++] - 'a'] = 2;  // 带参数选项标记为2
+        else
+            st[S[i] - 'a'] = 1;    // 不带参数选项标记为1
+    }
+
+/*
+st['a'-'a'] = st[0] = 1  →  -a 无参
+st['l'-'a'] = st[11] = 1 →  -l 无参
+st['b'-'a'] = st[1] = 1  →  -b 无参
+st['w'-'a'] = st[22] = 2 →  -w 带参
+st['x'-'a'] = st[23] = 1 →  -x 无参
+其他 st[i] = 0 → 不是合法选项
+*/
+
+    char ch;
+    int n, Case = 0;
+    cin >> n;
+    while (n--) {
+        cin >> S;
+        ch = getchar();           // 读入命令名称
+        for (int i = 0; i <= 25; i++) {
+            param[i].clear();
+            vis[i] = 0;            // 清零操作
+        }
+        if (ch == '\n') goto Nex;  // 如果遇到换行符则停止读入
+        S.clear();
+        while ((ch = getchar()),
+            ch != '\n' && ch != EOF)  // 读入一行字符，遇到换行符结束
+            S.push_back(ch);
+        S.push_back(' ');              // 末尾加空格
+        len = S.size();
+        for (int i = 0; i <= len - 1; i++) {
+            int t = S[i + 1] - 'a';
+            // 如果字符非法，则停止
+            if (i + 2 >= len || S[i] != '-' || S[i + 2] != ' ' ||
+                S[i + 1] > 'z' || S[i + 1] < 'a' || !st[t])
+                goto Nex;
+            vis[t] = 1;                 // 标记字符存在
+            if (st[t] == 1)             // 不带参数字符
+                i += 2;
+            else                        // 带参数字符
+            {
+                i += 3;
+                if (i < len) param[t].clear();
+                while (i < len && S[i] != ' ') {
+                    if (S[i] != '-' && (S[i] > 'z' || S[i] < 'a') &&
+                        !isdigit(S[i]))  // 如果字符参数不合法
+                    {
+                        param[t].clear();  // 清空数组并停止
+                        goto Nex;
+                    }
+                    param[t].push_back(S[i++]);  // 如果字符参数合法则放入param中
+                }
+            }
+        }
+    Nex:;
+        printf("Case %d: ", ++Case);
+        for (int i = 0; i <= 25; i++)
+            if (vis[i])  // 如果字符存在则输出
+            {
+                printf("-%c ", i + 'a');
+                if (st[i] == 2) cout << param[i] << ' ';
+            }
+        cout << endl;
+    }
+    return 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
