@@ -290,43 +290,43 @@
 
 
 //======================1.5任务调度==============
-
-#include <algorithm>
-#include <cstdio>
-#include <cstring>
-#define MAXN 45
-
-int n;
-int a[MAXN], b[MAXN], c[MAXN], d[MAXN];
-int dp[MAXN][MAXN * 12];
-
-int main() {
-    int i, j;
-    scanf("%d", &n);
-    for (i = 1; i <= n; ++i) {
-        scanf("%d%d%d%d", a + i, b + i, c + i, d + i);
-        if (c[i] > a[i]) c[i] = a[i];// 用GPU反而更慢？不如只用CPU
-        if (d[i] > b[i]) d[i] = b[i];// 全资源不如双CPU？不选
-        if (d[i] > c[i]) d[i] = c[i]; // 全资源不如CPU+GPU？不选
-    }
-    memset(dp, 0x3f, sizeof(dp));//memset 会按字节填充，将 dp 数组的每个字节都设置为 0x3f
-    dp[0][0] = 0;//dp[i][j]：处理完前 i 个任务后，GPU 总使用时长为 j 时的最小 CPU 使用时长
-    for (i = 1; i <= n; ++i)
-        for (j = 0; j <= MAXN * 10; ++j) {
-            dp[i][j] = dp[i - 1][j] + a[i];
-            if (j >= c[i] && dp[i - 1][j - c[i]] < dp[i][j])
-                dp[i][j] = dp[i - 1][j - c[i]];
-            if (j >= d[i] && dp[i - 1][j - d[i]] + d[i] < dp[i][j])
-                dp[i][j] = dp[i - 1][j - d[i]] + d[i];
-           /* if (dp[i - 1][j] + b[i] < dp[i][j])
-                dp[i][j] = dp[i - 1][j] + b[i];*/
-        }
-    int ans = 1e9;
-    for (j = 0; j <= n * 10; ++j)
-        if (ans > dp[n][j] && ans > j) ans = std::max(dp[n][j], j);
-    printf("%d\n", ans);
-    return 0;
-}
+//
+//#include <algorithm>
+//#include <cstdio>
+//#include <cstring>
+//#define MAXN 45
+//
+//int n;
+//int a[MAXN], b[MAXN], c[MAXN], d[MAXN];
+//int dp[MAXN][MAXN * 12];
+//
+//int main() {
+//    int i, j;
+//    scanf("%d", &n);
+//    for (i = 1; i <= n; ++i) {
+//        scanf("%d%d%d%d", a + i, b + i, c + i, d + i);
+//        if (c[i] > a[i]) c[i] = a[i];// 用GPU反而更慢？不如只用CPU
+//        if (d[i] > b[i]) d[i] = b[i];// 全资源不如双CPU？不选
+//        if (d[i] > c[i]) d[i] = c[i]; // 全资源不如CPU+GPU？不选
+//    }
+//    memset(dp, 0x3f, sizeof(dp));//memset 会按字节填充，将 dp 数组的每个字节都设置为 0x3f
+//    dp[0][0] = 0;//dp[i][j]：处理完前 i 个任务后，GPU 总使用时长为 j 时的最小 CPU 使用时长
+//    for (i = 1; i <= n; ++i)
+//        for (j = 0; j <= MAXN * 10; ++j) {
+//            dp[i][j] = dp[i - 1][j] + a[i];
+//            if (j >= c[i] && dp[i - 1][j - c[i]] < dp[i][j])
+//                dp[i][j] = dp[i - 1][j - c[i]];
+//            if (j >= d[i] && dp[i - 1][j - d[i]] + d[i] < dp[i][j])
+//                dp[i][j] = dp[i - 1][j - d[i]] + d[i];
+//           /* if (dp[i - 1][j] + b[i] < dp[i][j])
+//                dp[i][j] = dp[i - 1][j] + b[i];*/
+//        }
+//    int ans = 1e9;
+//    for (j = 0; j <= n * 10; ++j)
+//        if (ans > dp[n][j] && ans > j) ans = std::max(dp[n][j], j);
+//    printf("%d\n", ans);
+//    return 0;
+//}
 
 
 
