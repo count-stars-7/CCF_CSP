@@ -51,8 +51,8 @@
 //	printf("%d", ans);
 //	return 0;
 //}
-
-
+//
+//
 ////差分前缀和方法
 //#include<stdio.h>
 //int diff[105][105];  // 差分数组
@@ -92,3 +92,69 @@
 //    printf("%d", ans);
 //    return 0;
 //}
+
+
+
+
+
+
+//====================2.3字符串匹配=======================
+//#include <algorithm>
+//#include <cstdio>
+//#include <iostream>
+//#include <string>
+//#include <cctype>  // 用于tolower函数
+//
+//using namespace std;
+//
+//const int N = 110;
+//string S, St;  // S是模式串，St是母串
+//int sensitive, T;
+//
+//bool check(char a, char b) {
+//    if (!sensitive)  // 不区分大小写
+//        return tolower(a) == tolower(b);
+//    else  // 区分大小写
+//        return a == b;
+//}
+//
+//int main() {
+//    cin >> S >> sensitive >> T;
+//    int n = S.size();  // 模式串长度
+//
+//    while (T--) {  // 处理T组母串
+//        cin >> St;
+//        int m = St.size();  // 母串长度
+//
+//        for (int i = 0; i <= m - n; i++) {
+//            bool flag = true;  // 乐观假设，后续如果发现不匹配再改为false
+//            for (int j = 0; j < n; j++) {
+//                if (!check(St[i + j], S[j])) {
+//                    flag = false;
+//                    break;  // 有一位不匹配，直接跳出内层循环
+//                }
+//            }
+//            if (flag) {  // 找到匹配
+//                cout << St << endl;
+//                break;  // 找到后跳出外层循环，不再继续检查该母串
+//            }
+//        }
+//    }
+//    return 0;
+//}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
